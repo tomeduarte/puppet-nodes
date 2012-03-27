@@ -1,0 +1,10 @@
+# OS X stuff
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Vim stuff
+.*.sw[a-z]
+*.un~
+Session.vim
