@@ -61,9 +61,17 @@ class java_runtimes {
   }
 }
 
+class firefox {
+  package { 'firefox':
+#    ensure  => "10.0.2+build1-0ubuntu0.$lsbdistrelease.1"
+    ensure  => "11.0+build1-0ubuntu0.$lsbdistrelease.2"
+  }
+}
+
 # NODES
 node default {
   include timezone
   include mysql
   include java_runtimes
+  include firefox
 }
