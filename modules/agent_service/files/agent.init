@@ -1,0 +1,36 @@
+#!/bin/bash
+#
+# source: http://zetetic.net/blog/2009/1/21/dead-simple-ruby-daemons-using-looper.html
+# adapted: @tomeduarte -- http://iamto.me
+
+usage(){
+  echo $"Usage: $0 {start|stop|restart}"
+}
+
+PROGRAM="/usr/local/bin/agent"
+
+# if the daemon is missing, well, the daemon is missing!
+test -f $PROGRAM || exit 5
+
+# See how we were called
+case "$1" in
+  start)
+  nohup $PROGRAM > /dev/null 2>&1 &
+    ;;
+  stop)
+    PID=`ps auxw | grep ${PROGRAM} | grep -v grep | awk '{ print $2 }'`
+    echo "Stopping PID: ${PID}"
+    kill $PID
+    sleep 2
+    ;;
+  restart)
+    $0 stop
+    $0 start
+    ;;
+  *)
+    usage
+    exit 1
+  ;;
+esac
+
+exit 0

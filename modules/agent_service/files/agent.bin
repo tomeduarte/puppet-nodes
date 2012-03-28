@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby1.8
+#
+# source: http://zetetic.net/blog/2009/1/21/dead-simple-ruby-daemons-using-looper.html
+# adapted: @tomeduarte -- http://iamto.me
+
+require 'rubygems'
+require 'looper'
+require 'fileutils'
+
+class LoopEndelessly
+  include Looper
+
+  def initialize
+    @run = true
+    @sleep = 60
+  end # initialize
+
+  def run
+    loopme(@sleep) { FileUtils.touch '/root/agent_daemon.timestamp' }
+  end # run
+
+end # class
+
+# and here's how we kick it off:
+LoopEndelessly.new.run

@@ -36,7 +36,7 @@ class mysql {
 # JAVA
 class sun_jre_6 {
   package { 'debconf-utils':
-    ensure  => installed
+    ensure  => installed,
   }
 
   exec { "agree-license":
@@ -64,7 +64,7 @@ class java_runtimes {
 class firefox {
   package { 'firefox':
 #    ensure  => "10.0.2+build1-0ubuntu0.$lsbdistrelease.1"
-    ensure  => "11.0+build1-0ubuntu0.$lsbdistrelease.2"
+    ensure  => "11.0+build1-0ubuntu0.$lsbdistrelease.2",
   }
 }
 
@@ -74,4 +74,5 @@ node default {
   include mysql
   include java_runtimes
   include firefox
+  include agent_service
 }
