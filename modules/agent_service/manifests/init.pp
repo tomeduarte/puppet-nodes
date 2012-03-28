@@ -33,7 +33,9 @@ class agent_service {
     notify  => Service['agent']
   }
 
+  include timezone
   service { "agent":
+    require     => Class['timezone'],
     name        => 'agent.init',
     ensure      => running,
     enable      => true,
